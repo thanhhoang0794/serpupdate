@@ -1,0 +1,90 @@
+@startuml SerpUpdate
+
+skinparam class {
+BackgroundColor PaleGoldenRod
+BorderColor Black
+BorderColor<<Added>> White
+BackgroundColor<<Added>> Gray
+BorderColor<<Added>> White
+}
+
+class User {
+    user_id: INTEGER PK
+    fullname: TEXT
+    email: TEXT
+    password: TEXT
+    isActivate: INTEGER
+    free_credit: INTEGER
+    paid_credit: INTEGER
+    createdAt: TEXT
+    updatedAt: TEXT
+}
+class Transaction {
+    transaction_id: INTEGER PK
+    user_id: INTEGER FK
+    credit_amount: INTEGER
+    price: INTEGER
+    payment_method: TEXT
+    transaction_date: TEXT
+    status: TEXT
+    currency: TEXT
+    description: TEXT
+}
+class UserTransaction {
+    id: INTEGER PK
+    user_id: INTEGER FK
+    transaction_id: INTEGER FK
+}
+
+class SequelizeMeta{
+    name: TEXT
+}
+
+class domain {
+    id: INTEGER PK
+    domain: TEXT
+    slug: TEXT
+    keywordCount: INTEGER
+    lastUpdated: TEXT
+    added: TEXT
+    tags: TEXT
+    notification: INTEGER
+    notification_interval: TEXT
+    notification_emails: TEXT
+    search_console: TEXT
+}
+
+note left: notification_interval, \n notification_emails, \n search_console is already using snake_case \n 
+
+class keyword {
+    id: INTEGER PK
+    keyword: TEXT
+    device: TEXT
+    contry: TEXT
+    city: TEXT
+    latlong: TEXT
+    domain: TEXT
+    lastUpdated: TEXT
+    added: TEXT
+    position: INTEGER
+    history: TEXT
+    volume: INTEGER
+    url: TEXT
+    tags: TEXT
+    lastResult: TEXT
+    sticky: INTEGER
+    updating: INTEGER
+    lastUpdateError: TEXT
+    settings: TEXT
+    
+
+}
+
+domain "one" --- "many" keyword
+
+class User <<Added>>
+class Transaction <<Added>>
+class UserTransaction <<Added>>
+
+
+@enduml
