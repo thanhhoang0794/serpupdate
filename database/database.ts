@@ -1,15 +1,16 @@
 import { Sequelize } from 'sequelize-typescript';
-import sqlite3 from 'sqlite3';
+import { PostgresDialect } from '@sequelize/postgres';
 import Domain from './models/domain';
 import Keyword from './models/keyword';
 
-const connection = new Sequelize({
-   dialect: 'sqlite',
-   host: '0.0.0.0',
-   username: process.env.USER_NAME ? process.env.USER_NAME : process.env.USER,
-   password: process.env.PASSWORD,
-   database: 'sequelize',
-   dialectModule: sqlite3,
+const sequelize = new Sequelize({
+   dialect: 'postgres',
+   host: process.env.DB_HOST || 'localhost', // Update the host if needed
+   port: Number(process.env.DB_PORT) || 5432, // Specify the port if needed
+   username: process.env.DB_USER || 'postgres',
+   password: process.env.DB_PASSWORD || '',
+   ssl: true,
+   database: process.env.DB_NAME || 'postgres',
    pool: {
       max: 5,
       min: 0,
@@ -17,7 +18,6 @@ const connection = new Sequelize({
    },
    logging: false,
    models: [Domain, Keyword],
-   storage: './data/database.sqlite',
 });
 
-export default connection;
+export default sequelize;

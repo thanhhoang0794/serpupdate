@@ -28,6 +28,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -42,3 +43,6 @@ TODO
 
 #database
 data/
+
+.adminjs
+database/config.js

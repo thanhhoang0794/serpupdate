@@ -8,6 +8,12 @@ const nextConfig = {
   publicRuntimeConfig: {
    version,
  },
+ rewrites: () => [
+   {
+     source: "/serp-admin/:path*",
+     destination: "/api/serp-admin/:path*",
+   },
+ ],
 };
 
 module.exports = nextConfig;
